@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "719204512042",
+    "project_id": "chat-c39",
+    "storage_bucket": "chat-c39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719204512042:android:19495cf89a839647a62e53",
+        "android_client_info": {
+          "package_name": "com.mis.route.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8rt0JGUxt4CL1n0zFq7HfFwgKpqOnaHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
