@@ -33,9 +33,8 @@ class RegisterViewModel : BaseViewModel() {
                 registerUserInDB(user!!.uid)
             } else {
                 isRegistering.value = false
-                viewMessage.value = ViewMessage(
-                    message = task.exception?.localizedMessage ?: "something went wrong",
-                )
+                viewMessage.value = ViewMessage(message = task.exception?.localizedMessage
+                    ?: "something went wrong",)
             }
         }
     }

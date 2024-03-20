@@ -18,7 +18,8 @@ object MyDatabase {
     }
 
     fun getUserFromDB(uid: String, onComplete: OnCompleteListener<DocumentSnapshot>) {
-        Firebase.firestore
+        Firebase
+            .firestore
             .collection(usersCollection)
             .document(uid)
             .get()

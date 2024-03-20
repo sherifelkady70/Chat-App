@@ -16,6 +16,7 @@ class LoginViewModel : BaseViewModel() {
     val isLoading = MutableLiveData(false)
     val authService = Firebase.auth
     val events = MutableLiveData<LoginViewEvent>()
+
     fun login() {
         if (isLoading.value == true)return
         if (!validateInputs())return
