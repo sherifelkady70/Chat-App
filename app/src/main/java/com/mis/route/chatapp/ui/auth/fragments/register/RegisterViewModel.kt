@@ -24,10 +24,8 @@ class RegisterViewModel : BaseViewModel() {
         if (isRegistering.value == true)return
         if (!validateInputs())return
         isRegistering.value = true
-        authService.createUserWithEmailAndPassword(
-            emailLiveData.value!!,
-            passwordLiveData.value!!,
-        ).addOnCompleteListener { task ->
+        authService.createUserWithEmailAndPassword(emailLiveData.value!!, passwordLiveData.value!!,)
+            .addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val user = task.result.user
                 registerUserInDB(user!!.uid)
