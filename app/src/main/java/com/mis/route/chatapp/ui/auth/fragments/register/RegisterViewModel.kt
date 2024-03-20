@@ -1,14 +1,19 @@
 package com.mis.route.chatapp.ui.auth.fragments.register
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.mis.route.chatapp.ViewMessage
 import com.mis.route.chatapp.base.BaseViewModel
 import com.mis.route.chatapp.database.MyDatabase
 import com.mis.route.chatapp.database.User
+import com.mis.route.chatapp.ui.auth.fragments.register.repo.ResgisterRepo
+import com.mis.route.chatapp.ui.auth.fragments.register.repo.ResgisterRepoImpl
+import kotlinx.coroutines.launch
 
 class RegisterViewModel : BaseViewModel() {
+    val registerRepo : ResgisterRepo = ResgisterRepoImpl()
     val userNameLiveData = MutableLiveData<String>()
     val userNameError = MutableLiveData<String?>()
     val emailLiveData = MutableLiveData<String>()
@@ -24,17 +29,20 @@ class RegisterViewModel : BaseViewModel() {
         if (isRegistering.value == true)return
         if (!validateInputs())return
         isRegistering.value = true
-        authService.createUserWithEmailAndPassword(emailLiveData.value!!, passwordLiveData.value!!,)
-            .addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val user = task.result.user
-                registerUserInDB(user!!.uid)
-            } else {
-                isRegistering.value = false
-                viewMessage.value = ViewMessage(message = task.exception?.localizedMessage
-                    ?: "something went wrong",)
-            }
+        viewModelScope.launch {
+            registerRepo.register(userNameLiveData.value!!,emailLiveData.value!!,passwordLiveData.value!!)
         }
+//        authService.createUserWithEmailAndPassword(emailLiveData.value!!, passwordLiveData.value!!,)
+//            .addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                val user = task.result.user
+//                registerUserInDB(user!!.uid)
+//            } else {
+//                isRegistering.value = false
+//                viewMessage.value = ViewMessage(message = task.exception?.localizedMessage
+//                    ?: "something went wrong",)
+//            }
+//        }
     }
 
     private fun registerUserInDB(uid: String) {
