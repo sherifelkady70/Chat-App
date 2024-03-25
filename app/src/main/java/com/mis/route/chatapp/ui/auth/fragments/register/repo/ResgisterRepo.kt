@@ -4,4 +4,6 @@ import com.mis.route.chatapp.database.User
 
 interface ResgisterRepo {
     suspend fun register(userName:String,email:String,password:String) : User
+
+    suspend fun login(email: String,password: String):User
 }

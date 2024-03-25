@@ -84,7 +84,7 @@
             android:layout_marginBottom="80dp"
             android:background="@drawable/shape_button_background"
             android:paddingHorizontal="32dp"
-            android:onClick="@{()->vm.login()}"
+
             app:cardBackgroundColor="@{vm.isLoading==true ? @color/white : @color/light_blue}"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
@@ -134,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:onClick="@{()->vm.onGotoRegisterClick()}"
+
             android:text="@string/or_create_new_account"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_btn" />

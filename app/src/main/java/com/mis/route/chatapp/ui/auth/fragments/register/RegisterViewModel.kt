@@ -1,18 +1,15 @@
 package com.mis.route.chatapp.ui.auth.fragments.register
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.mis.route.chatapp.ViewMessage
-import com.mis.route.chatapp.base.BaseViewModel
-import com.mis.route.chatapp.database.MyDatabase
-import com.mis.route.chatapp.database.User
 import com.mis.route.chatapp.ui.auth.fragments.register.repo.ResgisterRepo
 import com.mis.route.chatapp.ui.auth.fragments.register.repo.ResgisterRepoImpl
 import kotlinx.coroutines.launch
 
-class RegisterViewModel : BaseViewModel() {
+class RegisterViewModel : ViewModel() {
     val registerRepo : ResgisterRepo = ResgisterRepoImpl()
     val userNameLiveData = MutableLiveData<String>()
     val userNameError = MutableLiveData<String?>()
@@ -34,26 +31,6 @@ class RegisterViewModel : BaseViewModel() {
         }
     }
 
-    private fun registerUserInDB(uid: String) {
-        val user = User(
-            uid,
-            userNameLiveData.value!!,
-            emailLiveData.value!!,
-        )
-        MyDatabase.createUser(user) { task ->
-            isRegistering.value = false
-            if (task.isSuccessful) {
-                events.postValue(
-                    RegisterViewEvents.NavigateToHome(user),
-                )
-            } else {
-                viewMessage.value = ViewMessage(
-                    message = task.exception?.localizedMessage ?: "",
-                    posActionName = "ok",
-                )
-            }
-        }
-    }
 
     fun validateInputs(): Boolean {
         var isValid = true
