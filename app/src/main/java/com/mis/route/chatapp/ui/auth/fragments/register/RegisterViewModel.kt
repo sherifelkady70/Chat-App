@@ -32,17 +32,6 @@ class RegisterViewModel : BaseViewModel() {
         viewModelScope.launch {
             registerRepo.register(userNameLiveData.value!!,emailLiveData.value!!,passwordLiveData.value!!)
         }
-//        authService.createUserWithEmailAndPassword(emailLiveData.value!!, passwordLiveData.value!!,)
-//            .addOnCompleteListener { task ->
-//            if (task.isSuccessful) {
-//                val user = task.result.user
-//                registerUserInDB(user!!.uid)
-//            } else {
-//                isRegistering.value = false
-//                viewMessage.value = ViewMessage(message = task.exception?.localizedMessage
-//                    ?: "something went wrong",)
-//            }
-//        }
     }
 
     private fun registerUserInDB(uid: String) {

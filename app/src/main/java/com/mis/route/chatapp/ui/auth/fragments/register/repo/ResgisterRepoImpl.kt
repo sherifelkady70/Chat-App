@@ -2,7 +2,6 @@ package com.mis.route.chatapp.ui.auth.fragments.register.repo
 
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.mis.route.chatapp.ViewMessage
 import com.mis.route.chatapp.database.User
 import kotlinx.coroutines.tasks.await
 
