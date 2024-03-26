@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.mis.route.chatapp.ui.auth.fragments.register.repo.ResgisterRepo
-import com.mis.route.chatapp.ui.auth.fragments.register.repo.ResgisterRepoImpl
+import com.mis.route.chatapp.ui.auth.fragments.repo.ResgisterRepo
+import com.mis.route.chatapp.ui.auth.fragments.repo.ResgisterRepoImpl
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {

@@ -1,4 +1,4 @@
-package com.mis.route.chatapp.ui.auth.fragments.register.repo
+package com.mis.route.chatapp.ui.auth.fragments.repo
 
 import com.mis.route.chatapp.database.User
 
