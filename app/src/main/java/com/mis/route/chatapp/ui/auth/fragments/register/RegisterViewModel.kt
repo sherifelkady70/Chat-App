@@ -20,8 +20,10 @@ class RegisterViewModel : ViewModel() {
     val passwordConfirmLiveData = MutableLiveData<String>()
     val passwordConfirmError = MutableLiveData<String?>()
     val isRegistering = MutableLiveData(false)
-    val authService = Firebase.auth
     val events = MutableLiveData<RegisterViewEvents>()
+
+
+
     fun register() {
         if (isRegistering.value == true)return
         if (!validateInputs())return
