@@ -11,8 +11,8 @@ class ResgisterRepoImpl : ResgisterRepo {
         val authResult =
         Firebase.auth.createUserWithEmailAndPassword(email,password).await()
         val user = User(uid = authResult.user?.uid,userName,email)
-        val myDoc =  Firebase.firestore.collection(User.COLLECTION_NAME).document()
-        myDoc.set(myDoc)
+        val myDoc =  Firebase.firestore.collection(User.COLLECTION_NAME).document(authResult.user?.uid!!)
+        myDoc.set(user)
         return user
     }
 
