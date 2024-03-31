@@ -2,7 +2,7 @@ package com.mis.route.chatapp.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mis.route.chatapp.models.ViewMessage
+import com.mis.route.chatapp.database.ViewMessage
 
 open class BaseViewModel : ViewModel() {
 

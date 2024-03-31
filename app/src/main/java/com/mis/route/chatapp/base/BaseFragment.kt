@@ -81,12 +81,14 @@ abstract class BaseFragment<VM:BaseViewModel,DB:ViewDataBinding> : Fragment() {
         myDialog.setTitle(title)
         myDialog.setMessage(message)
         posBtnTitle.let {
-            myDialog.setPositiveButton(
-                posBtnTitle
-            ) { dialog, which ->
-                dialog?.dismiss()
-                onPosBtnClick?.invoke()
-            }
+            myDialog.setPositiveButton(posBtnTitle,
+            object : DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    dialog?.dismiss()
+                    onPosBtnClick?.invoke()
+                }
+
+            })
         }
         negBtnTitle.let {
             myDialog.setNegativeButton(negBtnTitle,

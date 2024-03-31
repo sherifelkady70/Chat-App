@@ -1,4 +1,4 @@
-package com.mis.route.chatapp.models
+package com.mis.route.chatapp.database
 
 data class ViewMessage(
     var title: String? = null,

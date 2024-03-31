@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mis.route.chatapp.R
 import com.mis.route.chatapp.base.BaseFragment
 import com.mis.route.chatapp.databinding.FragmentLoginBinding
+import com.mis.route.chatapp.ui.auth.MainActivity
 
 class LoginFragment : BaseFragment<LoginViewModel,FragmentLoginBinding>() {
 
@@ -36,7 +37,9 @@ class LoginFragment : BaseFragment<LoginViewModel,FragmentLoginBinding>() {
       
     
     private fun navigateToRegister(){
-
+        if (activity == null) return
+        (activity as MainActivity).navController
+            .navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
     private fun navigateToHome(){

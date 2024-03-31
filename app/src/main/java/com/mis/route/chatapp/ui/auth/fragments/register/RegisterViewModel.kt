@@ -1,12 +1,9 @@
 package com.mis.route.chatapp.ui.auth.fragments.register
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 import com.mis.route.chatapp.base.BaseViewModel
-import com.mis.route.chatapp.models.ViewMessage
+import com.mis.route.chatapp.database.ViewMessage
 import com.mis.route.chatapp.ui.auth.fragments.repo.ResgisterRepo
 import com.mis.route.chatapp.ui.auth.fragments.repo.ResgisterRepoImpl
 import kotlinx.coroutines.launch
@@ -33,7 +30,11 @@ class RegisterViewModel : BaseViewModel() {
         viewModelScope.launch {
             isLoading.value=true
             try {
-                registerRepo.register(userNameLiveData.value!!,emailLiveData.value!!,passwordLiveData.value!!)
+                registerRepo.register(
+                    userNameLiveData.value!!,
+                    emailLiveData.value!!,
+                    passwordLiveData.value!!
+                )
                 isLoading.value = false
             }catch (e : Exception){
                 isLoading.value = false
