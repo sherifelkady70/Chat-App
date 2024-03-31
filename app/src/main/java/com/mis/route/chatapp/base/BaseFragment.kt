@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.mis.route.chatapp.R
 
-abstract class BaseFragment<VM:ViewModel,DB:ViewDataBinding> : Fragment() {
+abstract class BaseFragment<VM:BaseViewModel,DB:ViewDataBinding> : Fragment() {
 
     lateinit var viewModel : VM
     lateinit var dataBinding : DB
@@ -29,14 +29,39 @@ abstract class BaseFragment<VM:ViewModel,DB:ViewDataBinding> : Fragment() {
         return dataBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeLiveData()
+    }
+
     abstract fun getLayoutId(): Int
 
     abstract fun initViewModel() : VM
+
+
+     fun observeLiveData(){
+        viewModel.isLoading.observe(viewLifecycleOwner){ loading ->
+            if(loading){
+                showLoading()
+            }else{
+                hideLoading()
+            }
+        }
+
+        viewModel.viewMessage.observe(viewLifecycleOwner) { vMessage ->
+            showDialog(
+                vMessage.title, vMessage.message, vMessage.posBtnTitle, vMessage.onPosBtnClick,
+                vMessage.onNegBtnClick,
+                vMessage.negBtnTitle
+            )
+        }
+    }
 
     fun showLoading(){
         val builder = AlertDialog.Builder(activity)
         builder.setView(R.layout.loading)
         dialog = builder.create()
+        dialog?.show()
     }
     fun hideLoading(){
         dialog?.dismiss()
@@ -73,6 +98,8 @@ abstract class BaseFragment<VM:ViewModel,DB:ViewDataBinding> : Fragment() {
 
                 })
         }
+
+        myDialog.create().show()
 
     }
 

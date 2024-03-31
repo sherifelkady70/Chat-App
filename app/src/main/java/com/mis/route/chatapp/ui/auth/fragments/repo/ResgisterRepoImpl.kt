@@ -3,7 +3,7 @@ package com.mis.route.chatapp.ui.auth.fragments.repo
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
-import com.mis.route.chatapp.database.User
+import com.mis.route.chatapp.models.User
 import kotlinx.coroutines.tasks.await
 
 class ResgisterRepoImpl : ResgisterRepo {

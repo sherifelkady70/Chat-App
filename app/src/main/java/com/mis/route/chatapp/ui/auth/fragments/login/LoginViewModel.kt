@@ -4,14 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.mis.route.chatapp.database.User
+import com.mis.route.chatapp.base.BaseViewModel
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel : BaseViewModel() {
     val emailLiveData = MutableLiveData<String>()
     val emailError = MutableLiveData<String?>()
     val passwordLiveData = MutableLiveData<String>()
     val passwordError = MutableLiveData<String?>()
-    val isLoading = MutableLiveData(false)
     val authService = Firebase.auth
     val events = MutableLiveData<LoginViewEvent>()
 

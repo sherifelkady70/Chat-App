@@ -1,4 +1,4 @@
-package com.mis.route.chatapp.database
+package com.mis.route.chatapp.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
