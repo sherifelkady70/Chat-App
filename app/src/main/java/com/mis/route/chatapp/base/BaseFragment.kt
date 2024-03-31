@@ -1,6 +1,7 @@
 package com.mis.route.chatapp.base
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,13 +43,37 @@ abstract class BaseFragment<VM:ViewModel,DB:ViewDataBinding> : Fragment() {
     }
 
     fun showDialog(
-        title : String?=null,
-        message : String?=null,
-        posBtnTitle : String?=null,
-        negBtnTitle : String?=null,
+        title: String? = null,
+        message: String? = null,
+        posBtnTitle: String? = null,
+        onPosBtnClick: (() -> Unit)? = null,
+        onNegBtnClick: (() -> Unit)? = null,
+        negBtnTitle: String? = null,
 
-    ){
-        dialog?.setTitle(title)
-        dialog?.setMessage(message)
+
+        ) {
+        val myDialog = AlertDialog.Builder(activity)
+        myDialog.setTitle(title)
+        myDialog.setMessage(message)
+        posBtnTitle.let {
+            myDialog.setPositiveButton(
+                posBtnTitle
+            ) { dialog, which ->
+                dialog?.dismiss()
+                onPosBtnClick?.invoke()
+            }
+        }
+        negBtnTitle.let {
+            myDialog.setNegativeButton(negBtnTitle,
+                object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        dialog?.dismiss()
+                        onNegBtnClick?.invoke()
+                    }
+
+                })
+        }
+
     }
+
 }

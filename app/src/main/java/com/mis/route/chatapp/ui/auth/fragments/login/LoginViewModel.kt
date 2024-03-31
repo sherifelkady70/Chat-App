@@ -16,6 +16,9 @@ class LoginViewModel : ViewModel() {
     val events = MutableLiveData<LoginViewEvent>()
 
 
+    fun gotoRegister(){
+        events.value = LoginViewEvent.NavigateToRegister
+    }
     fun validateInputs(): Boolean {
         var isValid = true
         if (emailLiveData.value.isNullOrBlank()) {
