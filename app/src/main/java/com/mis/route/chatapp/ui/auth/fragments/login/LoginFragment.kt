@@ -40,9 +40,13 @@ class LoginFragment : BaseFragment<LoginViewModel,FragmentLoginBinding>() {
         if (activity == null) return
         (activity as MainActivity).navController
             .navigate(R.id.action_loginFragment_to_registerFragment)
+        viewModel.events.value = null
     }
 
     private fun navigateToHome(){
-
+        if (activity == null) return
+        (activity as MainActivity).navController
+            .navigate(R.id.action_loginFragment_to_homeFragment)
+        viewModel.events.value = null
     }
 }

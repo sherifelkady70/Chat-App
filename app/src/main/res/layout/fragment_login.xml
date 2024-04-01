@@ -84,6 +84,7 @@
             android:layout_marginBottom="80dp"
             android:background="@drawable/shape_button_background"
             android:paddingHorizontal="32dp"
+            android:onClick="@{()-> vm.login()}"
             app:cardBackgroundColor="@{vm.isLoading==true ? @color/white : @color/light_blue}"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp"

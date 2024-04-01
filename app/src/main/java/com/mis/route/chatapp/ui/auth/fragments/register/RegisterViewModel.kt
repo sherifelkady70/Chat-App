@@ -3,13 +3,14 @@ package com.mis.route.chatapp.ui.auth.fragments.register
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mis.route.chatapp.base.BaseViewModel
+import com.mis.route.chatapp.database.User
 import com.mis.route.chatapp.database.ViewMessage
-import com.mis.route.chatapp.ui.auth.fragments.repo.ResgisterRepo
-import com.mis.route.chatapp.ui.auth.fragments.repo.ResgisterRepoImpl
+import com.mis.route.chatapp.ui.auth.fragments.repo.AuthRepo
+import com.mis.route.chatapp.ui.auth.fragments.repo.AuthRepoImpl
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : BaseViewModel() {
-    val registerRepo : ResgisterRepo = ResgisterRepoImpl()
+    private val registerAuthRepo : AuthRepo = AuthRepoImpl()
     val userNameLiveData = MutableLiveData<String>()
     val userNameError = MutableLiveData<String?>()
     val emailLiveData = MutableLiveData<String>()
@@ -30,12 +31,13 @@ class RegisterViewModel : BaseViewModel() {
         viewModelScope.launch {
             isLoading.value=true
             try {
-                registerRepo.register(
+                registerAuthRepo.register(
                     userNameLiveData.value!!,
                     emailLiveData.value!!,
                     passwordLiveData.value!!
                 )
                 isLoading.value = false
+                events.value = RegisterViewEvents.NavigateToLogin
             }catch (e : Exception){
                 isLoading.value = false
                 viewMessage.value = ViewMessage(
@@ -48,7 +50,7 @@ class RegisterViewModel : BaseViewModel() {
     }
 
 
-    fun validateInputs(): Boolean {
+    private fun validateInputs(): Boolean {
         var isValid = true
         if (userNameLiveData.value.isNullOrBlank()) {
             userNameError.value = "please Enter User Name"
