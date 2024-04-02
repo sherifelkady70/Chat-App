@@ -16,6 +16,7 @@ class RoomCreationViewModel : BaseViewModel() {
     var desError = MutableLiveData<String?>()
     var categoryError = MutableLiveData<String?>()
     var createRoomRepo : CreatRoomRepo = CreateRoomRepoImpl()
+    var events = MutableLiveData<RoomCreationEvents>()
 
 
     fun createRoom(){
@@ -26,6 +27,7 @@ class RoomCreationViewModel : BaseViewModel() {
                 createRoomRepo.createRoom(name = nameLiveData.value!! ,
                     category = categoryLiveData.value!!, description = desLiveData.value!!)
                 isLoading.value = false
+                events.value = RoomCreationEvents.RoomCreationEvent
             }catch (e:Throwable){
                 isLoading.value = false
                 viewMessage.value = ViewMessage(

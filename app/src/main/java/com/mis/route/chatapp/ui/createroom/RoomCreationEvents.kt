@@ -1,4 +1,5 @@
 package com.mis.route.chatapp.ui.createroom
 
-class RoomCreationEvents {
+sealed class RoomCreationEvents {
+    object RoomCreationEvent : RoomCreationEvents()
 }

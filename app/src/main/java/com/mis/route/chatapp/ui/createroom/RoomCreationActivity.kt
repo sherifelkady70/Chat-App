@@ -11,13 +11,20 @@ import com.mis.route.chatapp.databinding.ActivityRoomCreationBinding
 class RoomCreationActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityRoomCreationBinding
-    lateinit var viewModel : RoomCreationViewModel
+    lateinit var viewModel: RoomCreationViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_room_creation)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_room_creation)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[RoomCreationViewModel::class.java]
-       binding.vm = viewModel
-    }
+        binding.vm = viewModel
 
+        viewModel.events.observe(this) {
+            when (it) {
+                is RoomCreationEvents.RoomCreationEvent -> {
+                    finish()
+                }
+            }
+        }
+    }
 }
