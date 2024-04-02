@@ -39,7 +39,7 @@ abstract class BaseFragment<VM:BaseViewModel,DB:ViewDataBinding> : Fragment() {
     abstract fun initViewModel() : VM
 
 
-     fun observeLiveData(){
+     private fun observeLiveData(){
         viewModel.isLoading.observe(viewLifecycleOwner){ loading ->
             if(loading){
                 showLoading()

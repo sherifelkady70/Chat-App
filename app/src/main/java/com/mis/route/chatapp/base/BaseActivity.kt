@@ -13,18 +13,34 @@ abstract class BaseActivity<VM:BaseViewModel,DB:ViewDataBinding> :AppCompatActiv
 
     lateinit var viewModel : VM
     lateinit var dataBinding: DB
-    var dialog : AlertDialog?=null
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    private var dialog : AlertDialog?=null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel=initViewModel()
         dataBinding = DataBindingUtil.setContentView(this,getLayoutId())
         dataBinding.lifecycleOwner = this
+        observeLiveData()
     }
 
     abstract fun initViewModel() : VM
     abstract fun getLayoutId() : Int
+    open fun observeLiveData(){
+        viewModel.isLoading.observe(this){ loading ->
+            if(loading){
+                showLoading()
+            }else{
+                hideLoading()
+            }
+        }
 
-
+        viewModel.viewMessage.observe(this) { vMessage ->
+            showDialog(
+                vMessage.title, vMessage.message, vMessage.posBtnTitle, vMessage.onPosBtnClick,
+                vMessage.onNegBtnClick,
+                vMessage.negBtnTitle
+            )
+        }
+    }
     fun showLoading(){
         val builder = AlertDialog.Builder(this)
         builder.setView(R.layout.loading)
