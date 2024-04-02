@@ -12,19 +12,7 @@ import com.mis.route.chatapp.databinding.ActivityRoomCreationBinding
 class RoomCreationActivity : BaseActivity<RoomCreationViewModel,ActivityRoomCreationBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_room_creation)
         dataBinding.vm = viewModel
-        dataBinding.lifecycleOwner = this
-        observeLiveData()
-    }
-
-
-    override fun initViewModel(): RoomCreationViewModel {
-        return ViewModelProvider(this)[RoomCreationViewModel::class.java]
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_room_creation
     }
 
     override fun observeLiveData(){
@@ -36,4 +24,13 @@ class RoomCreationActivity : BaseActivity<RoomCreationViewModel,ActivityRoomCrea
             }
         }
     }
+    override fun initViewModel(): RoomCreationViewModel {
+        return ViewModelProvider(this)[RoomCreationViewModel::class.java]
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_room_creation
+    }
+
+
 }

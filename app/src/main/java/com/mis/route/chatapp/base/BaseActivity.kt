@@ -16,8 +16,8 @@ abstract class BaseActivity<VM:BaseViewModel,DB:ViewDataBinding> :AppCompatActiv
     private var dialog : AlertDialog?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel=initViewModel()
-        dataBinding = DataBindingUtil.setContentView(this,getLayoutId())
+        viewModel = initViewModel();
+        dataBinding = DataBindingUtil.setContentView(this, getLayoutId())
         dataBinding.lifecycleOwner = this
         observeLiveData()
     }
