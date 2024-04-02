@@ -10,6 +10,6 @@ data class User(
     val email: String? = null,
 ) : Parcelable {
     companion object{
-        val COLLECTION_NAME = "users"
+        const val COLLECTION_NAME = "users"
     }
 }
