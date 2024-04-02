@@ -2,7 +2,6 @@ package com.mis.route.chatapp.base
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity

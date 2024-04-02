@@ -130,7 +130,8 @@
                     <AutoCompleteTextView
                         android:id="@+id/room_category_atv"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:text="@={vm.categoryLiveData}"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
