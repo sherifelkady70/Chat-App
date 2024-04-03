@@ -8,7 +8,7 @@ import com.mis.route.chatapp.R
 import com.mis.route.chatapp.database.Room
 import com.mis.route.chatapp.databinding.ItemRoomBinding
 
-class RoomsAdapter(var roomsList : List<Room>) : RecyclerView.Adapter<RoomsAdapter.ViewHolder>() {
+class RoomsAdapter(var roomsList : List<Room> , var onItemClick : (room:Room,position:Int) -> Unit) : RecyclerView.Adapter<RoomsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = DataBindingUtil.inflate<ItemRoomBinding>(
             LayoutInflater.from(parent.context),
@@ -24,7 +24,7 @@ class RoomsAdapter(var roomsList : List<Room>) : RecyclerView.Adapter<RoomsAdapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       holder.bind(roomsList[position])
+       holder.bind(roomsList[position],position)
     }
 
     fun updateList(newRoomsList: List<Room>) {
@@ -32,9 +32,12 @@ class RoomsAdapter(var roomsList : List<Room>) : RecyclerView.Adapter<RoomsAdapt
         notifyDataSetChanged()
     }
 
-    class ViewHolder(var binding: ItemRoomBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(room:Room){
+    inner class ViewHolder(var binding: ItemRoomBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(room:Room,position: Int){
             binding.room = room
+            binding.root.setOnClickListener {
+                onItemClick.invoke(room,position)
+            }
             binding.executePendingBindings()
         }
     }

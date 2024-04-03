@@ -17,7 +17,7 @@ fun imageConditions(image:ImageView,category : String){
     if(category == Constants.MOVIES){
         image.setImageResource(R.drawable.image_movies_cat)
     }
-    if(category==(Constants.MUSIC)){
+    if(category == Constants.MUSIC){
         image.setImageResource(R.drawable.image_music_cat)
     }
 }

@@ -4,14 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import com.mis.route.chatapp.Constants
 import com.mis.route.chatapp.R
 import com.mis.route.chatapp.base.BaseFragment
 import com.mis.route.chatapp.databinding.ActivityHomeBinding
+import com.mis.route.chatapp.ui.chat.ChatActivity
 import com.mis.route.chatapp.ui.createroom.RoomCreationActivity
 
 class HomeFragment : BaseFragment<HomeViewModel,ActivityHomeBinding>() {
 
-    private var adapter = RoomsAdapter(listOf())
+    lateinit var adapter : RoomsAdapter
     override fun getLayoutId(): Int {
         return R.layout.activity_home
     }
@@ -24,10 +26,14 @@ class HomeFragment : BaseFragment<HomeViewModel,ActivityHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         dataBinding.addRoomBtn.setOnClickListener { navigateToCreateRoom() }
         initRv()
-        viewModel.getList()
     }
 
     private fun initRv(){
+        adapter = RoomsAdapter(listOf()){ room, position ->
+            val intent = Intent(activity,ChatActivity::class.java)
+            intent.putExtra(Constants.ROOM_KEY,room)
+            startActivity(intent)
+        }
         viewModel.listOfRooms.observe(viewLifecycleOwner){
             adapter.updateList(it)
         }
