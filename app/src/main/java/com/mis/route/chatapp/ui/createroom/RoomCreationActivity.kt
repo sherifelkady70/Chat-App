@@ -1,6 +1,7 @@
 package com.mis.route.chatapp.ui.createroom
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
@@ -13,8 +14,15 @@ class RoomCreationActivity : BaseActivity<RoomCreationViewModel,ActivityRoomCrea
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataBinding.vm = viewModel
+        custmizeSpinner()
     }
 
+
+    private fun custmizeSpinner(){
+        val array = arrayOf("sports","chat")
+        val adapter : ArrayAdapter<String> = ArrayAdapter(this,R.layout.item_list,array)
+        dataBinding.roomCategoryAtv.setAdapter(adapter)
+    }
     override fun observeLiveData(){
         viewModel.events.observe(this) {
             when (it) {

@@ -6,6 +6,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.mis.route.chatapp.R
 import com.mis.route.chatapp.ui.auth.MainActivity
+import com.mis.route.chatapp.ui.home.HomeFragment
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
