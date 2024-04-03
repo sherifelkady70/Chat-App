@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.mis.route.chatapp.Constants
 import com.mis.route.chatapp.R
 import com.mis.route.chatapp.base.BaseActivity
 import com.mis.route.chatapp.databinding.ActivityRoomCreationBinding
@@ -19,7 +20,7 @@ class RoomCreationActivity : BaseActivity<RoomCreationViewModel,ActivityRoomCrea
 
 
     private fun custmizeSpinner(){
-        val array = arrayOf("sports","chat")
+        val array = arrayOf(Constants.SPORTS,Constants.MOVIES,Constants.MUSIC)
         val adapter : ArrayAdapter<String> = ArrayAdapter(this,R.layout.item_list,array)
         dataBinding.roomCategoryAtv.setAdapter(adapter)
     }

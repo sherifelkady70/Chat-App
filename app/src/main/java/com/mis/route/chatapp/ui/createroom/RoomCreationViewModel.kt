@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mis.route.chatapp.base.BaseViewModel
 import com.mis.route.chatapp.database.ViewMessage
-import com.mis.route.chatapp.ui.createroom.repo.CreatRoomRepo
+import com.mis.route.chatapp.ui.createroom.repo.CreateRoomRepo
 import com.mis.route.chatapp.ui.createroom.repo.CreateRoomRepoImpl
 import kotlinx.coroutines.launch
 
@@ -15,7 +15,7 @@ class RoomCreationViewModel : BaseViewModel() {
     var nameError = MutableLiveData<String?>()
     var desError = MutableLiveData<String?>()
     var categoryError = MutableLiveData<String?>()
-    var createRoomRepo : CreatRoomRepo = CreateRoomRepoImpl()
+    var createRoomRepo : CreateRoomRepo = CreateRoomRepoImpl()
     var events = MutableLiveData<RoomCreationEvents>()
 
 
@@ -24,6 +24,7 @@ class RoomCreationViewModel : BaseViewModel() {
         viewModelScope.launch {
             isLoading.value = true
             try {
+                isLoading.value = true
                 createRoomRepo.createRoom(name = nameLiveData.value!! ,
                     category = categoryLiveData.value!!, description = desLiveData.value!!)
                 isLoading.value = false
@@ -35,8 +36,6 @@ class RoomCreationViewModel : BaseViewModel() {
                     e.localizedMessage
                 )
             }
-
-
         }
     }
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="room"
+            type="com.mis.route.chatapp.database.Room" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        android:layout_margin="12dp"
+        app:cardElevation="10dp"
+        android:padding="15dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                app:imageConditions="@{room.category}"
+                tools:src="@drawable/image_movies_cat"
+                android:contentDescription="@string/todo" />
+            <TextView
+                android:id="@+id/text_view"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                tools:text="sports"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:text="@{room.category}"/>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
