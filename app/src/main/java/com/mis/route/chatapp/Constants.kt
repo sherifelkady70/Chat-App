@@ -5,4 +5,5 @@ object Constants {
     const val MUSIC="Music"
     const val MOVIES="Movies"
     const val ROOM_KEY = "room_key"
+    const val ROOM_KEY_POSITION = "position"
 }

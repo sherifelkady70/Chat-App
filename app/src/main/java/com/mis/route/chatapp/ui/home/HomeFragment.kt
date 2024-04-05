@@ -2,6 +2,7 @@ package com.mis.route.chatapp.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.mis.route.chatapp.Constants
@@ -32,10 +33,13 @@ class HomeFragment : BaseFragment<HomeViewModel,ActivityHomeBinding>() {
         adapter = RoomsAdapter(listOf()){ room, position ->
             val intent = Intent(activity,ChatActivity::class.java)
             intent.putExtra(Constants.ROOM_KEY,room)
+            intent.putExtra(Constants.ROOM_KEY_POSITION,position)
             startActivity(intent)
+            Log.e("initRv","what happen")
         }
         viewModel.listOfRooms.observe(viewLifecycleOwner){
             adapter.updateList(it)
+            Log.e("initRv","$it")
         }
         dataBinding.recyclerView.adapter = adapter
     }

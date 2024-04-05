@@ -17,8 +17,9 @@ import com.mis.route.chatapp.ui.createroom.RoomCreationActivity
 
 class ChatActivity : BaseActivity<ChatViewModel,ActivityChatBinding>() {
 
+    lateinit var room : Room
 
-    @RequiresApi(TIRAMISU)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataBinding.sendRoomBtn.setOnClickListener { navigateToRoomCreation() }
@@ -35,15 +36,13 @@ class ChatActivity : BaseActivity<ChatViewModel,ActivityChatBinding>() {
         finish()
     }
 
-    @RequiresApi(TIRAMISU)
     private fun getIntentFrom(){
-        if(Build.VERSION.SDK_INT > TIRAMISU){
-         intent.getSerializableExtra(Constants.ROOM_KEY)
+        room = if(Build.VERSION.SDK_INT < TIRAMISU){
+            intent.getSerializableExtra(Constants.ROOM_KEY) as Room
+        }else {
+            intent.getSerializableExtra(Constants.ROOM_KEY, Room::class.java)!!
         }
-        else {
-            intent.getSerializableExtra(Constants.ROOM_KEY,Room::class.java)
-        }
-        Log.d("getIntentFrom","$intent")
+        Log.d("getIntentFrom","$room")
     }
 
 }
