@@ -6,4 +6,5 @@ object Constants {
     const val MOVIES="Movies"
     const val ROOM_KEY = "room_key"
     const val ROOM_KEY_POSITION = "position"
+    const val ROOM_MESSAGE_KEY = "room message"
 }

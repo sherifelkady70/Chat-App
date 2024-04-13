@@ -22,6 +22,7 @@ class ChatActivity : BaseActivity<ChatViewModel,ActivityChatBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        dataBinding.chatVM = viewModel
         dataBinding.sendRoomBtn.setOnClickListener { navigateToRoomCreation() }
         getIntentFrom()
     }
@@ -42,7 +43,7 @@ class ChatActivity : BaseActivity<ChatViewModel,ActivityChatBinding>() {
         }else {
             intent.getSerializableExtra(Constants.ROOM_KEY, Room::class.java)!!
         }
-        Log.d("getIntentFrom","$room")
+        viewModel.room = room
     }
 
 }

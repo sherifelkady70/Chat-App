@@ -6,4 +6,6 @@ interface CreateRoomRepo {
     suspend fun createRoom(name:String,category:String,description:String)
 
     suspend fun getAllRoom() : List<Room>
+
+    suspend fun sendMessage(message: String , roomId : String)
 }
