@@ -25,6 +25,7 @@ class ChatActivity : BaseActivity<ChatViewModel,ActivityChatBinding>() {
         dataBinding.chatVM = viewModel
         dataBinding.sendRoomBtn.setOnClickListener { navigateToRoomCreation() }
         getIntentFrom()
+        viewModel.listeningChanges()
     }
 
     override fun initViewModel(): ChatViewModel =

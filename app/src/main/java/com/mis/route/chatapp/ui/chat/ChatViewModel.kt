@@ -1,5 +1,6 @@
 package com.mis.route.chatapp.ui.chat
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mis.route.chatapp.base.BaseViewModel
@@ -7,6 +8,7 @@ import com.mis.route.chatapp.database.Room
 import com.mis.route.chatapp.database.ViewMessage
 import com.mis.route.chatapp.ui.createroom.repo.CreateRoomRepo
 import com.mis.route.chatapp.ui.createroom.repo.CreateRoomRepoImpl
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ChatViewModel : BaseViewModel() {
@@ -17,11 +19,24 @@ class ChatViewModel : BaseViewModel() {
         viewModelScope.launch {
             try {
                 repo.sendMessage(roomMessage.value!!,room.id!!)
+                roomMessage.value = ""
             }catch (t:Throwable){
                 viewMessage.value = ViewMessage(
                     "Error",
                     t.localizedMessage
                 )
+            }
+        }
+    }
+
+    fun listeningChanges(){
+        viewModelScope.launch {
+            try {
+                repo.listeningMessagesChanges(room.id!!).collect{
+                    Log.d("listeningChanges","$it")
+                }
+            }catch (t:Throwable){
+
             }
         }
     }
