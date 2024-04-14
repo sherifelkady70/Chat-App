@@ -1,5 +1,6 @@
 package com.mis.route.chatapp.ui.createroom.repo
 
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.snapshots
 import com.google.firebase.firestore.toObjects
@@ -33,14 +34,16 @@ class CreateRoomRepoImpl : CreateRoomRepo {
         val roomMessage = RoomMessage(id = roomId,
         senderId = UserProvider.user!!.uid!!,
         senderName = UserProvider.user!!.userName!!,
-        content = message)
+        content = message,
+        Timestamp.now().toDate()
+        )
         messageDoc.set(roomMessage).await()
     }
 
     override suspend fun listeningMessagesChanges(roomId: String) : Flow<List<RoomMessage>> {
         val listMessages = flow {
             FirebaseFirestore.getInstance().collection(Room.ROOM_COLLECTION_NAME).document(roomId)
-                .collection(Constants.ROOM_MESSAGE_KEY).snapshots().collect{
+                .collection(Constants.ROOM_MESSAGE_KEY).orderBy("date").snapshots().collect{
                     emit(it.toObjects(RoomMessage::class.java))
                 }
         }

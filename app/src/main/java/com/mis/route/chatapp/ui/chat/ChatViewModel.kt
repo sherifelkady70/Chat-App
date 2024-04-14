@@ -5,16 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mis.route.chatapp.base.BaseViewModel
 import com.mis.route.chatapp.database.Room
+import com.mis.route.chatapp.database.RoomMessage
 import com.mis.route.chatapp.database.ViewMessage
 import com.mis.route.chatapp.ui.createroom.repo.CreateRoomRepo
 import com.mis.route.chatapp.ui.createroom.repo.CreateRoomRepoImpl
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ChatViewModel : BaseViewModel() {
     lateinit var room : Room
     val roomMessage = MutableLiveData("")
     var repo : CreateRoomRepo = CreateRoomRepoImpl()
+    var messagesLiveData = MutableLiveData<List<RoomMessage>>()
     fun sendMessage(){
         viewModelScope.launch {
             try {
@@ -33,10 +34,10 @@ class ChatViewModel : BaseViewModel() {
         viewModelScope.launch {
             try {
                 repo.listeningMessagesChanges(room.id!!).collect{
-                    Log.d("listeningChanges","$it")
+                    messagesLiveData.value = it
                 }
             }catch (t:Throwable){
-
+                viewMessage.value = ViewMessage("Error",t.localizedMessage)
             }
         }
     }

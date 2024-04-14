@@ -1,5 +1,6 @@
 package com.mis.route.chatapp.ui.chat
 
+import android.content.AbstractThreadedSyncAdapter
 import android.content.Intent
 import android.os.Build
 import android.os.Build.VERSION_CODES.TIRAMISU
@@ -12,12 +13,15 @@ import com.mis.route.chatapp.Constants
 import com.mis.route.chatapp.R
 import com.mis.route.chatapp.base.BaseActivity
 import com.mis.route.chatapp.database.Room
+import com.mis.route.chatapp.database.RoomMessage
 import com.mis.route.chatapp.databinding.ActivityChatBinding
+import com.mis.route.chatapp.ui.chat.adapters.MessagesAdapter
 import com.mis.route.chatapp.ui.createroom.RoomCreationActivity
 
 class ChatActivity : BaseActivity<ChatViewModel,ActivityChatBinding>() {
 
     lateinit var room : Room
+     private lateinit var adapter : MessagesAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +30,7 @@ class ChatActivity : BaseActivity<ChatViewModel,ActivityChatBinding>() {
         dataBinding.sendRoomBtn.setOnClickListener { navigateToRoomCreation() }
         getIntentFrom()
         viewModel.listeningChanges()
+        initRV()
     }
 
     override fun initViewModel(): ChatViewModel =
@@ -47,4 +52,15 @@ class ChatActivity : BaseActivity<ChatViewModel,ActivityChatBinding>() {
         viewModel.room = room
     }
 
+    private fun initRV(){
+        adapter = MessagesAdapter(listOf())
+        dataBinding.messagesRv.adapter = adapter
+    }
+
+    override fun observeLiveData() {
+        super.observeLiveData()
+        viewModel.messagesLiveData.observe(this){
+            adapter.updateMessagesList(it)
+        }
+    }
 }
