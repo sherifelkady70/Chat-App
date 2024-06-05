@@ -1,3 +1,14 @@
+## Chat App
+This Simple Chap Application to Make Rooms for Chatting between Different Peoples and used in this Project many Advanced Topics like MVVM and Firebase Auth and Firebase firestore and Clound Finctions.
+
+* **Technologies:**
+     * Kotlin.
+     * MVVM.
+     * Repository Pattern.
+     * Firebase Services.
+     * Coroutines.
+     * Flows.
+
 <table>
   <tr>
     <td><img src="https://github.com/sherifelkady70/Chat-App/blob/mydev/Screenshot%202024-04-23%20224709.png" alt="Image 1" width="200" height="350"></td>
